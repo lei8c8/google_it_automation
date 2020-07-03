@@ -1,0 +1,46 @@
+
+[Week1: Module1]
+# generate diff file 
+diff -u old_file new_file > change.diff # it is also called patch file
+
+# patch a file using diff file 
+patch old_file < change.diff 
+
+
+[Week1: Module2]
+git config --global user.email "example@example.com"
+git config --global user.name [you name]
+
+leichen@Leis-MBP git_and_github % mkdir checks
+leichen@Leis-MBP git_and_github % cd checks 
+leichen@Leis-MBP checks % git init
+Initialized empty Git repository in /Users/leichen/Documents/coursera/google_it_automation/git_and_github/checks/.git/
+leichen@Leis-MBP checks % 
+leichen@Leis-MBP checks % ls -l .git
+total 24
+-rw-r--r--   1 leichen  staff   23 Jul  3 17:09 HEAD
+-rw-r--r--   1 leichen  staff  137 Jul  3 17:09 config
+-rw-r--r--   1 leichen  staff   73 Jul  3 17:09 description
+drwxr-xr-x  14 leichen  staff  448 Jul  3 17:09 hooks
+drwxr-xr-x   3 leichen  staff   96 Jul  3 17:09 info
+drwxr-xr-x   4 leichen  staff  128 Jul  3 17:09 objects
+drwxr-xr-x   4 leichen  staff  128 Jul  3 17:09 refs
+
+leichen@Leis-MBP checks % git add disk_usage.py 
+leichen@Leis-MBP checks % git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   disk_usage.py
+
+[Week1: Module3]
+workflow
+1. git init // Initialize a repo 
+2. git config -l // check the configuration
+3. write your code 
+4. git status
+5. git add <file> // modified -> staged
+6. git commit -m "your message"
