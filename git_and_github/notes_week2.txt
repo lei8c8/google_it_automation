@@ -1,0 +1,179 @@
+[Week2: Module1]
+
+leichen@Leis-MBP checks % git commit -a -m "commit without staging"
+[master 4aef95d] commit without staging
+ 1 file changed, 3 insertions(+)
+leichen@Leis-MBP checks % 
+
+Check commit info.
+commit 4aef95d32b2f489e6035837201c377d14bf31567 (HEAD -> master)
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Sat Jul 4 10:10:42 2020 -0400
+
+    commit without staging
+
+diff --git a/disk_usage.py b/disk_usage.py
+index 01a3106..d8a558d 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -1,6 +1,9 @@
+ #!/usr/bin/env python3
++import os
+ 
+ def main():
+     pass
++
++
+ if __name__ == "__main__":
+     main()
+
+commit 861ad0a8a7738e43d760ed85e8f34848fe33c627
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Fri Jul 3 17:18:56 2020 -0400
+
+    added main function
+
+diff --git a/disk_usage.py b/disk_usage.py
+index c0d03b3..01a3106 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -2,5 +2,5 @@
+ 
+ def main():
+     pass
+-
+-main()
++if __name__ == "__main__":
++    main()
+
+leichen@Leis-MBP checks % git show 4aef95d32b2f489e6035837201c377d14bf31567
+commit 4aef95d32b2f489e6035837201c377d14bf31567 (HEAD -> master)
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Sat Jul 4 10:10:42 2020 -0400
+
+    commit without staging
+
+diff --git a/disk_usage.py b/disk_usage.py
+index 01a3106..d8a558d 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -1,6 +1,9 @@
+ #!/usr/bin/env python3
++import os
+ 
+ def main():
+     pass
++
++
+ if __name__ == "__main__":
+     main()
+
+leichen@Leis-MBP checks % git log --stat
+commit 4aef95d32b2f489e6035837201c377d14bf31567 (HEAD -> master)
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Sat Jul 4 10:10:42 2020 -0400
+
+    commit without staging
+
+ disk_usage.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 861ad0a8a7738e43d760ed85e8f34848fe33c627
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Fri Jul 3 17:18:56 2020 -0400
+
+    added main function
+
+ disk_usage.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit fed7afd102c0c0dceb14200a571191f0950289a4
+Author: Lei Chen <lei8c8@gmail.com>
+Date:   Fri Jul 3 17:12:57 2020 -0400
+
+    Add new disk_usage.py
+
+ disk_usage.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+ leichen@Leis-MBP checks % git diff
+diff --git a/disk_usage.py b/disk_usage.py
+index d8a558d..3a16214 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -2,7 +2,7 @@
+ import os
+ 
+ def main():
+-    pass
++    print("everything is ok")
+ 
+ 
+ if __name__ == "__main__":
+
+
+leichen@Leis-MBP checks % git add -p 
+diff --git a/disk_usage.py b/disk_usage.py
+index d8a558d..3a16214 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -2,7 +2,7 @@
+ import os
+ 
+ def main():
+-    pass
++    print("everything is ok")
+ 
+ 
+ if __name__ == "__main__":
+(1/1) Stage this hunk [y,n,q,a,d,e,?]? y
+
+leichen@Leis-MBP checks % git diff --staged
+diff --git a/disk_usage.py b/disk_usage.py
+index d8a558d..3a16214 100644
+--- a/disk_usage.py
++++ b/disk_usage.py
+@@ -2,7 +2,7 @@
+ import os
+ 
+ def main():
+-    pass
++    print("everything is ok")
+ 
+ 
+ if __name__ == "__main__":
+
+
+leichen@Leis-MBP checks % git commit -m "added a message"
+[master 421d8b6] added a message
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+
+ Remove file 
+
+leichen@Leis-MBP checks % git rm disk_usage.py 
+rm 'disk_usage.py'
+leichen@Leis-MBP checks % git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	deleted:    disk_usage.py
+
+leichen@Leis-MBP checks % git commit -m "delete a file"
+[master 220f30c] delete a file
+ 1 file changed, 9 deletions(-)
+ delete mode 100644 disk_usage.py
+
+
+Command	Explanation & Link
+git commit -a	Stages files automatically
+git log -p	Produces patch text
+git show	Shows various objects
+git diff	Is similar to the Linux `diff` command, and can show the differences in various commits
+git diff --staged	An alias to --cached, this will show all staged files compared to the named commit
+git add -p	Allows a user to interactively review patches to add to the current commit
+git mv	Similar to the Linux `mv` command, this moves a file
+git rm	Similar to the Linux `rm` command, this deletes, or removes a file
+
+
+[Week2: Module2]
