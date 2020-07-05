@@ -1,0 +1,32 @@
+1. Problem solving steps:
+    a. getting information
+    b. find the root cause
+    c. performing the necessary remediation
+
+2. strace - used to trace the system calls
+    strace <./python_script.py>
+    -o to store the output into a file
+    eg. strace -o failure.strace ./purplebox.py
+
+3. ltrace - looking at library calls made by the software
+
+4. Logs on different OS'
+    a. Linux - /var/log/syslog 
+    b. MacOS - /Library/Logs 
+    c. Windows - Event Viewer
+
+5. iotop - used to check io workload statistics
+
+6. ionice - reduce the priority of i/o process
+
+6. iftop - used to check network statistics
+
+7. rsync - backup data (-bwlimit to limit the network bandwidth)
+
+8. cat contacts.csv | ./import.py --server test (it fails)
+    a. wc -l contacts.csv # check the totol lines in the csv file 
+    b. head - 50 contacts.csv | ./import.py --server test # bisecting
+    c. head - 50 contacts.csv | head - 25 | ./import.py --server test # bisecting
+    d. head - 50 contacts.csv | tail - 25 | ./import.py --server test # bisecting
+    e. head - 50 contacts.csv | tail - 25 | head -13 | ./import.py --server test # bisecting
+    f. head - 50 contacts.csv | tail - 25 | head -13 | head -7 | ./import.py --server test # bisecting
