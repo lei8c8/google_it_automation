@@ -1,0 +1,54 @@
+1. Tools to monitor system
+    a. top
+    b. iotop
+    c. iftop
+    d. Activity Monitor on MacOS
+    e. Performance/Resource Monitor on Windows
+
+
+2. Slow web service
+    a. ab -n 500 site.example.com (ApacheBench)
+    b. ffmpeg (used for video convert) - (change nice value? 0 to 19)
+        for pid in $(pidof ffmpeg); do renice 19 $pid; done
+    c. ps ax | less # to find the processes of ffmpeg 
+    d. locate static/001.webm
+    e. grep ffmpeg * # try to find out the script starting all the ffmpeg processes
+    f. killall -STOP ffmpeg
+    g. Resume 1 process at a time
+        for pid in $(pidof ffmpeg); do while kill -CONT $pid; do sleep 1; done; done 
+
+        Monitoring Tools
+        Check out the following links for more information:
+
+        https://docs.microsoft.com/en-us/sysinternals/downloads/procmon 
+        http://www.brendangregg.com/linuxperf.html
+        http://brendangregg.com/usemethod.html
+        Activity Monitor in Mac:
+        Performance Monitor on Windows
+        https://www.digitalcitizen.life/how-use-resource-monitor-windows-7
+        https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
+        https://en.wikipedia.org/wiki/Cache_(computing)
+        https://www.reddit.com/r/linux/comments/d7hx2c/why_nice_levels_are_a_placebo_and_have_been_for_a/
+
+3. cProfile - used to profile python script
+
+4. time ./send_reminders.py "2020-01-13|Example|test1" # to display the time of python script execution
+    Read: actual time (Wall-clock time)
+    User: user space time 
+    Sys: system-level time
+
+5. pprofile3
+    pprofile3 -f callgrind -o profile.out ./send_reminders.py "2020-01-13|Example|test1"
+    kcachegrid profile.out
+
+
+6. Python Threading/Asyncio can be used for multithreading
+
+7. Multithreading example
+    from concurrent import futures
+    executor = futures.ThreadPoolExecutor()
+    executor.submit(process_file, root, basename)
+    print("Waiting for all threads to finish.")
+    executor.shutdown()
+
+8. Varnish to cache data
