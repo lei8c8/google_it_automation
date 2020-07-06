@@ -1,0 +1,61 @@
+
+1. memtest86 is used to test memory
+
+2. /var/log/syslog
+
+3. Watchdog to restart service
+
+4. Internal Server Error (500)
+
+5. sudo netstat -nlp | grep :80
+    ls -l /etc/nginx
+    sudo service uwsgi reload
+
+6. Resources for understanding crashes
+Process Monitor for Windows (Microsoft)
+Linux strace command tutorial for beginners (HowtoForge)
+How to trace your system calls on Mac OS (/etc/notes)
+
+7. Access Invalid Memory (Segmentation Faults)
+    - Install debug symbols
+    - Valgrind: a powerfufl tool that can tell us if the code is doing any invalid operations.
+    - Dr. Memory (Availble on both linux  and windows)
+
+8. pdb for python debug 
+
+9. logging module
+
+10. core files for segmentation fault 
+    a. ulimit -c unlimited # we want core files 
+    b. ls -l core # check the core file 
+    c. gdb -c core example # analyze the core file 
+    b. backtrace # run this inside gdb 
+    e. up # inside gdb
+    f. list # run this in gdb, it shows the c code 
+    g. print i 
+    h. print argv[0]
+    i. print argv[1] # off-one error
+
+11. pdb3 update_product.py new_product.csv 
+    a. continue
+    b. print(row)
+    c. open with utf-8
+    d. open with encoding = 'utf-8-sig'
+
+12. Resources for debugging crashes
+Resources for Debugging Crashes
+Check out the following links for more information:
+
+https://realpython.com/python-concurrency/
+https://hackernoon.com/threaded-asynchronous-magic-and-how-to-wield-it-bba9ed602c32
+https://stackoverflow.com/questions/33047452/definitive-list-of-common-reasons-for-segmentation-faults
+https://sites.google.com/a/case.edu/hpcc/home/important-notes-for-new-users/debugging-segmentation-faults
+Readable Python code on GitHub:
+
+https://github.com/fogleman/Minecraft
+https://github.com/cherrypy/cherrypy
+https://github.com/pallets/flask
+https://github.com/tornadoweb/tornado
+https://github.com/gleitz/howdoi
+https://github.com/bottlepy/bottle/blob/master/bottle.py
+https://github.com/sqlalchemy/sqlalchemy
