@@ -59,3 +59,10 @@ https://github.com/tornadoweb/tornado
 https://github.com/gleitz/howdoi
 https://github.com/bottlepy/bottle/blob/master/bottle.py
 https://github.com/sqlalchemy/sqlalchemy
+
+13. Writing postmortems
+    - what caused the issue
+    - what the impact of the issue was 
+    - how it got diagnosed
+    - the short-term remediation you applied
+    - the long-term remediation you recommended 
