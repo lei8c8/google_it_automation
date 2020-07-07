@@ -1,0 +1,20 @@
+1. Memory leak - when a chunk of memory that's no longer needed is not released.
+
+2. Garbage collector
+
+3. Memory profiler 
+    - for c, c++: valgrind
+    - for python: such as memory_profiler
+        eg. python3 -m memory_profiler contents_stat_simple.py
+
+4. lsof | grep deleted 
+
+5. uxterm (big scroll buffer)
+
+
+6. more about managing resources
+https://realpython.com/python-concurrency/
+https://hackernoon.com/threaded-asynchronous-magic-and-how-to-wield-it-bba9ed602c32
+https://www.pluralsight.com/blog/tutorials/how-to-profile-memory-usage-in-python
+https://www.linuxjournal.com/content/troubleshooting-network-problems
+
