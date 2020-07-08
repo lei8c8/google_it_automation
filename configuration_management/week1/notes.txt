@@ -1,0 +1,53 @@
+1. Infrastructure as Code 
+    a. Consistent
+    b. Versioned
+    c. Reliable
+    d. Repeatable
+
+2. What is Puppet?
+    a. Puppet Master + Puppet Agent (Client-server)
+   
+3. Puppet Resources
+    a. The basic unit for modeling the configuration that we want to manage
+
+4. Puppet Classes
+    class ntp {
+        package { 'ntp':
+            ensure => latest.
+        }
+        file { '/etc/ntp.conf':
+            source => 'puppet:///modules/ntp/ntp.conf',
+            replace => true,
+        }
+        service { 'ntp':
+            enable => true,
+            ensure => running,
+        }
+    }
+
+5. DSL = Domain Specific Language
+
+6. Puppet Facts = Variables that represent the characteristics of the system
+    example:
+
+    if $facts['is_virtual'] {
+        package { 'smartmontools':
+            ensure => purged,
+        }
+    } else {
+        package { 'smartmontools':
+            ensure => installed,
+        }
+    }
+
+7. exec example 
+exec { 'move example file':
+    command => 'mv /home/user/example.txt /home/user/Desktop',
+    onlyif => 'test -e /home/user/example.txt',
+}
+
+8. Reading
+https://puppet.com/docs/puppet/latest/lang_resources.html
+https://puppet.com/blog/deploy-packages-across-your-windows-estate-with-bolt-and-chocolatey/
+https://en.wikipedia.org/wiki/Domain-specific_language
+http://radar.oreilly.com/2015/04/the-puppet-design-philosophy.html
