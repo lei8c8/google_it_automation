@@ -1,0 +1,8 @@
+1. Parameters
+    a. Region and Zone
+    b. memory, cpu
+    c. boot disk
+
+2. GCP (Google Cloud Platform)
+    a. project
+    b. 
