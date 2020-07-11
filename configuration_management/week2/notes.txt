@@ -1,0 +1,102 @@
+1. Install puppet
+sudo apt install puppet-master
+
+2. Mainifests ends with .pp
+tony@tony-ubuntu16:~$ cat tools.pp
+package { 'htop':
+  ensure => present,
+}
+tony@tony-ubuntu16:~$ sudo puppet apply -v tools.pp
+Notice: Compiled catalog for tony-ubuntu16.fios-router.home in environment production in 0.67 seconds
+Info: Applying configuration version '1594482770'
+Notice: /Stage[main]/Main/Package[htop]/ensure: ensure changed 'purged' to 'present'
+Info: Creating state file /var/lib/puppet/state/state.yaml
+Notice: Finished catalog run in 7.88 seconds
+tony@tony-ubuntu16:~$ which htop
+/usr/bin/htop
+
+3. Managing resources with relationships
+
+tony@tony-ubuntu16:~$ cat ntp.pp 
+class ntp {
+  package { 'ntp':
+    ensure => 'latest',
+  }
+
+  file { '/etc/ntp.conf':
+    source => '/home/user/ntp.conf',
+    replace => true,
+    require => Package['ntp'],
+    notify => Service['ntp'],
+  }
+  
+  service { 'ntp':
+    enable => true,
+    ensure => running,
+    require => File['/etc/ntp.conf'],
+  }
+}
+
+include ntp
+
+4. Install module 
+tony@tony-ubuntu16:~$ sudo apt install puppet-module-puppetlabs-apache
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  linux-headers-4.15.0-45 linux-headers-4.15.0-45-generic linux-image-4.15.0-45-generic linux-modules-4.15.0-45-generic
+  linux-modules-extra-4.15.0-45-generic
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  puppet-module-puppetlabs-concat puppet-module-puppetlabs-stdlib
+The following NEW packages will be installed:
+  puppet-module-puppetlabs-apache puppet-module-puppetlabs-concat puppet-module-puppetlabs-stdlib
+0 upgraded, 3 newly installed, 0 to remove and 275 not upgraded.
+Need to get 160 kB of archives.
+After this operation, 735 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://us.archive.ubuntu.com/ubuntu xenial/universe amd64 puppet-module-puppetlabs-stdlib all 4.10.0-1 [57.2 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu xenial/universe amd64 puppet-module-puppetlabs-concat all 2.0.1-1 [11.1 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu xenial/universe amd64 puppet-module-puppetlabs-apache all 1.6.0-1 [92.0 kB]
+Fetched 160 kB in 0s (754 kB/s)                       
+Selecting previously unselected package puppet-module-puppetlabs-stdlib.
+(Reading database ... 261225 files and directories currently installed.)
+Preparing to unpack .../puppet-module-puppetlabs-stdlib_4.10.0-1_all.deb ...
+Unpacking puppet-module-puppetlabs-stdlib (4.10.0-1) ...
+Selecting previously unselected package puppet-module-puppetlabs-concat.
+Preparing to unpack .../puppet-module-puppetlabs-concat_2.0.1-1_all.deb ...
+Unpacking puppet-module-puppetlabs-concat (2.0.1-1) ...
+Selecting previously unselected package puppet-module-puppetlabs-apache.
+Preparing to unpack .../puppet-module-puppetlabs-apache_1.6.0-1_all.deb ...
+Unpacking puppet-module-puppetlabs-apache (1.6.0-1) ...
+Setting up puppet-module-puppetlabs-stdlib (4.10.0-1) ...
+update-alternatives: using /usr/share/puppet/modules.available/puppetlabs-stdlib to provide /usr/share/puppet/modules/stdlib (puppet-module-stdlib) in auto mode
+Setting up puppet-module-puppetlabs-concat (2.0.1-1) ...
+update-alternatives: using /usr/share/puppet/modules.available/puppetlabs-concat to provide /usr/share/puppet/modules/concat (puppet-module-concat) in auto mode
+Setting up puppet-module-puppetlabs-apache (1.6.0-1) ...
+update-alternatives: using /usr/share/puppet/modules.available/puppetlabs-apache to provide /usr/share/puppet/modules/apache (puppet-module-apache) in auto mode
+
+tony@tony-ubuntu16:/usr/share/puppet/modules.available/puppetlabs-apache$ ls -l
+total 24
+drwxr-xr-x 2 root root 4096 Jul 11 12:10 files
+drwxr-xr-x 3 root root 4096 Jul 11 12:10 lib
+drwxr-xr-x 8 root root 4096 Jul 11 12:10 manifests
+-rw-r--r-- 1 root root 1729 Jul 30  2015 metadata.json
+drwxr-xr-x 6 root root 4096 Jul 11 12:10 templates
+drwxr-xr-x 2 root root 4096 Jul 11 12:10 tests
+
+
+tony@tony-ubuntu16:~$ cat webserver.pp 
+include ::apache
+sudo puppet apply -v webserver.pp 
+
+
+5. Set autosign on server 
+tony@tony-ubuntu16:~$ sudo puppet config --section master set autosign true
+
+6. Set server on client 
+tony@tony-ubuntu16:~$ sudo puppet config set server localhost
+sudo puppet agent -v --test
+
+7. rspect test 
